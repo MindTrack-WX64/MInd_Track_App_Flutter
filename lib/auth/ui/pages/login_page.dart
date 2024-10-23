@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../shared/services/auth_service.dart';
 import '../../../shared/models/user.dart';
-import 'main_page.dart';
+import 'professional_main_page.dart';
+import 'patient_main_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,12 +22,21 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       print('Login successful: ${user.username}');
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MainPage(role: user.role),
-        ),
-      );
+      if (user.role == 'Professional') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfessionalMainPage(role: user.role),
+          ),
+        );
+      } else if (user.role == 'Patient') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PatientMainPage(role: user.role),
+          ),
+        );
+      }
     } catch (e) {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
