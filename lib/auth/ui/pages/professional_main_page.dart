@@ -27,7 +27,14 @@ class _ProfessionalMainPageState extends State<ProfessionalMainPage> {
 
   Future<void> _fetchProfessional() async {
     try {
-      final professional = await _professionalService.findById(widget.professionalId);
+      //final professional = await _professionalService.findById(widget.professionalId);
+      final professional = Professional(
+        id: 2,
+        name: "Dr. Smith",
+        specialty: "therapist",
+        patientIds: [1, 22],
+        plan: "Premium",
+      );
       setState(() {
         _professional = professional;
         _isLoading = false;

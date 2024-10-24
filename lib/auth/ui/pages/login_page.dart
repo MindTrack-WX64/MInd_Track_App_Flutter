@@ -16,33 +16,30 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() async {
     try {
-      final User user = await _authService.signIn(
-        _usernameController.text,
-        _passwordController.text,
-      );
-
-      print('Login successful: ${user.username}');
-      print('User role: ${user.role}');
-      if (user.role == 'Professional') {
+      //final User user = await _authService.signIn(
+      //  _usernameController.text,
+      //  _passwordController.text,
+      //);
+//
+      //print('Login successful: ${user.username}');
+      //print('User role: ${user.role}');
+      var role = 'Professional';
+      if (role == 'Professional') {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProfessionalMainPage(professionalId: user.id),
+            builder: (context) => ProfessionalMainPage(professionalId: 2),
           ),
         );
-      } else if (user.role == 'Patient') {
+      } else if (role == 'Patient') {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => PatientMainPage(
-                role: user.role,
-                patientName: user.username, // Assuming username is the patient's name
-                patientId: user.id,
-              )
+            builder: (context) => PatientMainPage(role: role),
           ),
         );
       } else {
-        print('Unknown role: ${user.role}');
+        print('Unknown role: ${role}');
       }
     } catch (e) {
       // Show error message
