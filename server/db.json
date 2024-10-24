@@ -19,18 +19,38 @@
       "medicalHistoryId": 1,
       "prescriptionId": 1,
       "diagnosisId": 1,
-      "name": "John",
-      "lastName": "Doe",
+      "name": "Juan Pablo",
+      "lastName": "Uribe",
       "birthDay": "1990-01-01T00:00:00.000Z",
-      "phone": "123-456-7890"
+      "phone": "456-123-1793"
+    },
+    {
+      "id": 2,
+      "medicalHistoryId": 2,
+      "prescriptionId": 2,
+      "diagnosisId": 2,
+      "name": "Harry Kane",
+      "lastName": "DOE",
+      "birthDay": "1990-01-01T00:00:00.000Z",
+      "phone": "123-121-1254"
+    },
+    {
+      "id": 22,
+      "medicalHistoryId": 22,
+      "prescriptionId": 22,
+      "diagnosisId": 22,
+      "name": "Antonio Suarez",
+      "lastName": "Uribe",
+      "birthDay": "1990-01-01T00:00:00.000Z",
+      "phone": "123-456-7589"
     }
   ],
   "professionals": [
     {
       "id": 2,
       "name": "Dr. Smith",
-      "specialty": "Cardiology",
-      "patientIds": [1],
+      "specialty": "therapist",
+      "patientIds": [1,22],
       "plan": "Premium"
     }
   ]

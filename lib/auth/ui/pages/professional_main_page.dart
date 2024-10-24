@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_track_app/shared/models/professional.dart';
-import "package:mind_track_app/shared/services/professional_service.dart";
+import 'package:mind_track_app/shared/services/professional_service.dart';
+import 'package:mind_track_app/patient-management/ui/pages/patient_management.dart';
 
 class ProfessionalMainPage extends StatefulWidget {
   final int professionalId;
@@ -42,20 +43,64 @@ class _ProfessionalMainPageState extends State<ProfessionalMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Professional Main Page')),
-      body: Center(
-        child: _isLoading
-            ? CircularProgressIndicator()
-            : _professional == null
-            ? Text('Professional not found false state')
-            : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Professional Name: ${_professional!.name}'),
-            Text('Specialty: ${_professional!.specialty}'),
-            Text('Plan: ${_professional!.plan}'),
-            Text('Patient IDs: ${_professional!.patientIds.join(', ')}'),
-          ],
-        ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : _professional == null
+          ? Center(child: Text('Professional not found'))
+          : Column(
+        children: [
+          ProfessionalInfo(professional: _professional!),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              children: [
+                _buildGridButton('Patients', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PatientManagementPage(patientIds: _professional!.patientIds),
+                    ),
+                  );
+                }),
+                _buildGridButton('Add Patient', () {}),
+                _buildGridButton('Profile', () {}),
+                _buildGridButton('Log Out', () {}),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGridButton(String text, VoidCallback onPressed) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(text),
+      ),
+    );
+  }
+}
+
+class ProfessionalInfo extends StatelessWidget {
+  final Professional professional;
+
+  const ProfessionalInfo({Key? key, required this.professional}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Professional Name: ${professional.name}', style: TextStyle(fontSize: 18)),
+          Text('Specialty: ${professional.specialty}', style: TextStyle(fontSize: 18)),
+          Text('Plan: ${professional.plan}', style: TextStyle(fontSize: 18)),
+          Text('Patient IDs: ${professional.patientIds.join(', ')}', style: TextStyle(fontSize: 18)),
+        ],
       ),
     );
   }
