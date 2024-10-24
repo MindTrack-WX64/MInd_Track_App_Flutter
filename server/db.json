@@ -11,6 +11,12 @@
       "username": "user2",
       "password": "password2",
       "role": "Professional"
+    },
+    {
+      "id": 1505,
+      "username": "user1505",
+      "password": "password1505",
+      "role": "Patient"
     }
   ],
   "patients": [
@@ -43,6 +49,20 @@
       "lastName": "Uribe",
       "birthDay": "1990-01-01T00:00:00.000Z",
       "phone": "123-456-7589"
+    },
+    {
+      "id": 1505,
+      "username": "user1505",
+      "password": "password1505",
+      "role": "Patient",
+      "medicalHistoryId": 1505,
+      "prescriptionId": 1505,
+      "diagnosisId": 1505,
+      "name": "nicoi",
+      "lastName": "cerv",
+      "birthDay": "1505",
+      "phone": "789456123",
+      "professionalId": 2
     }
   ],
   "professionals": [
