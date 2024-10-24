@@ -28,7 +28,8 @@
       "name": "Juan Pablo",
       "lastName": "Uribe",
       "birthDay": "1990-01-01T00:00:00.000Z",
-      "phone": "456-123-1793"
+      "phone": "456-123-1793",
+      "professionalId": 2
     },
     {
       "id": 2,
@@ -38,7 +39,8 @@
       "name": "Harry Kane",
       "lastName": "DOE",
       "birthDay": "1990-01-01T00:00:00.000Z",
-      "phone": "123-121-1254"
+      "phone": "123-121-1254",
+      "professionalId": 2
     },
     {
       "id": 22,
@@ -48,17 +50,15 @@
       "name": "Antonio Suarez",
       "lastName": "Uribe",
       "birthDay": "1990-01-01T00:00:00.000Z",
-      "phone": "123-456-7589"
+      "phone": "123-456-7589",
+      "professionalId": 11
     },
     {
       "id": 1505,
-      "username": "user1505",
-      "password": "password1505",
-      "role": "Patient",
       "medicalHistoryId": 1505,
       "prescriptionId": 1505,
       "diagnosisId": 1505,
-      "name": "nicoi",
+      "name": "nico",
       "lastName": "cerv",
       "birthDay": "1505",
       "phone": "789456123",

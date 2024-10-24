@@ -54,6 +54,7 @@ class _AddPatientPageState extends State<AddPatientPage> {
           medicalHistoryId: newUser.id,
           prescriptionId: newUser.id,
           diagnosisId: newUser.id,
+          professionalId: widget.professionalId,
         );
         await _patientService.addPatient(newPatient);
 
