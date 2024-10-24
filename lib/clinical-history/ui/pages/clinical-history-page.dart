@@ -7,12 +7,14 @@ class ClinicalHistoryPage extends StatefulWidget {
   final int patientId;
   final int clinicalHistoryId;
   final String patientName;
+  final String role; // Add role parameter
 
   const ClinicalHistoryPage({
     Key? key,
     required this.patientId,
     required this.clinicalHistoryId,
     required this.patientName,
+    required this.role, // Add role parameter
   }) : super(key: key);
 
   @override
@@ -69,21 +71,22 @@ class _ClinicalHistoryPageState extends State<ClinicalHistoryPage> {
             SizedBox(height: 10),
             Text('Updated At: ${_clinicalHistory!.updatedAt}', style: TextStyle(fontSize: 16)),
             SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ClinicalHistoryEditPage(
-                        clinicalHistory: _clinicalHistory!,
+            if (widget.role == 'professional') // Show button only for professionals
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClinicalHistoryEditPage(
+                          clinicalHistory: _clinicalHistory!,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                child: Text('Update'),
+                    );
+                  },
+                  child: Text('Update'),
+                ),
               ),
-            ),
           ],
         ),
       ),

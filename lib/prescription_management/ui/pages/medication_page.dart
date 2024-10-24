@@ -6,8 +6,9 @@ import 'package:mind_track_app/prescription_management/ui/pages/medication_form.
 
 class MedicationPage extends StatefulWidget {
   final int patientId;
+  final String role; // Add role parameter
 
-  const MedicationPage({Key? key, required this.patientId}) : super(key: key);
+  const MedicationPage({Key? key, required this.patientId, required this.role}) : super(key: key);
 
   @override
   _MedicationPageState createState() => _MedicationPageState();
@@ -46,17 +47,18 @@ class _MedicationPageState extends State<MedicationPage> {
       appBar: AppBar(
         title: Text('Prescription'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MedicationFormPage(patientId: widget.patientId),
-                ),
-              );
-            },
-          ),
+          if (widget.role == 'professional') // Show button only for professionals
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MedicationFormPage(patientId: widget.patientId),
+                  ),
+                );
+              },
+            ),
         ],
       ),
       body: _isLoading
