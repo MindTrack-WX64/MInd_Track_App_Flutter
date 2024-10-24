@@ -15,12 +15,11 @@ class PatientManagementPage extends StatefulWidget {
   _PatientManagementPageState createState() => _PatientManagementPageState();
 }
 
-class _PatientManagementPageState extends State<PatientManagementPage> with SingleTickerProviderStateMixin {
+class _PatientManagementPageState extends State<PatientManagementPage> {
   late PatientService _patientService;
   List<Patient> _patients = [];
   bool _isLoading = true;
   Map<int, bool> _showOptions = {};
-  Map<int, AnimationController> _animationControllers = {};
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _PatientManagementPageState extends State<PatientManagementPage> with Sing
 
   Future<void> _fetchPatients() async {
     try {
-      //List<Patient> patients = await _patientService.findByProfessionalId(widget.professionalId);
       List<Patient> patients = [
         Patient(
           id: 1,
@@ -66,13 +64,6 @@ class _PatientManagementPageState extends State<PatientManagementPage> with Sing
         _patients = patients;
         _isLoading = false;
         _showOptions = {for (var patient in patients) patient.id: false};
-        _animationControllers = {
-          for (var patient in patients)
-            patient.id: AnimationController(
-              vsync: this,
-              duration: Duration(milliseconds: 300),
-            )
-        };
       });
     } catch (e) {
       setState(() {
@@ -80,14 +71,6 @@ class _PatientManagementPageState extends State<PatientManagementPage> with Sing
       });
     }
   }
-  @override
-  void dispose() {
-    for (var controller in _animationControllers.values) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +83,7 @@ class _PatientManagementPageState extends State<PatientManagementPage> with Sing
         itemBuilder: (context, index) {
           final patient = _patients[index];
           return Card(
-            margin: EdgeInsets.all(8.0),
+            margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -114,39 +97,45 @@ class _PatientManagementPageState extends State<PatientManagementPage> with Sing
                         children: [
                           Text('${patient.name} ${patient.lastName}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                           Text('ID: ${patient.id}'),
-                          Text('Phone: ${patient.phone}'),
-                          Text('Birthday: ${patient.birthDay}'),
+                          Row(
+                            children: [
+                              Icon(Icons.phone, size: 16),
+                              SizedBox(width: 4),
+                              Text('Phone: ${patient.phone}'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.cake, size: 16),
+                              SizedBox(width: 4),
+                              Text('Birthday: ${patient.birthDay}'),
+                            ],
+                          ),
                         ],
                       ),
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _showOptions[patient.id] = !(_showOptions[patient.id] ?? false);
-                              if (_showOptions[patient.id]!) {
-                                _animationControllers[patient.id]?.forward();
-                              } else {
-                                _animationControllers[patient.id]?.reverse();
-                              }
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: _showOptions[patient.id] ?? false ? Colors.white : Colors.blue,
-                            foregroundColor: _showOptions[patient.id] ?? false ? Colors.blue : Colors.white,
-                          ),
-                          child: Text('Options'),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _showOptions[patient.id] = !(_showOptions[patient.id] ?? false);
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _showOptions[patient.id] ?? false ? Colors.white : Colors.blue,
+                          foregroundColor: _showOptions[patient.id] ?? false ? Colors.blue : Colors.white,
                         ),
+                        child: Text('Options'),
                       ),
                     ],
                   ),
-                  SizeTransition(
-                    sizeFactor: _animationControllers[patient.id]?.drive(CurveTween(curve: Curves.easeInOut)) ?? AlwaysStoppedAnimation(0.0),
-                    child: GridView.count(
+                  if (_showOptions[patient.id] ?? false) ...[
+                    SizedBox(height: 8.0), // Margin above the buttons
+                    GridView.count(
                       crossAxisCount: 2,
                       childAspectRatio: 3,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
+                      mainAxisSpacing: 8.0,
+                      crossAxisSpacing: 8.0,
                       children: [
                         _buildActionButton('Edit', Icons.edit, patient.id),
                         _buildActionButton('Prescription', Icons.receipt, patient.id),
@@ -156,7 +145,7 @@ class _PatientManagementPageState extends State<PatientManagementPage> with Sing
                         _buildActionButton('Appointments', Icons.calendar_today, patient.id),
                       ],
                     ),
-                  ),
+                  ],
                 ],
               ),
             ),
@@ -198,8 +187,11 @@ class _PatientManagementPageState extends State<PatientManagementPage> with Sing
           // Handle other button presses
         }
       },
-      icon: Icon(icon),
-      label: Text(text),
+      icon: Icon(icon, color: Colors.blue),
+      label: Text(text, style: TextStyle(color: Colors.blue)),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white, // Button background color
+      ),
     );
   }
 }
