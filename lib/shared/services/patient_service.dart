@@ -6,27 +6,20 @@ class PatientService {
   final String baseUrl = '10.0.2.2:3000';
 
   Future<Patient?> findById(int id) async {
-    print('Fetching all patients to find ID: $id');
     try {
       final response = await http.get(Uri.http(baseUrl, '/patients'));
-      print('HTTP GET request to $baseUrl/patients completed with status code: ${response.statusCode}');
-
       if (response.statusCode == 200) {
         final List<dynamic> patients = jsonDecode(response.body);
         for (var patient in patients) {
           if (patient['id'] == id) {
-            print('Patient found with ID: $id');
             return Patient.fromJson(patient);
           }
         }
-        print('No matching patient found with ID: $id');
         return null;
       } else {
-        print('Failed to fetch patients. Status code: ${response.statusCode}');
         throw Exception('Failed to load patient');
       }
     } catch (e) {
-      print('Error fetching patient: $e');
       return null;
     }
   }
@@ -45,4 +38,24 @@ class PatientService {
       print('Error adding patient: $e');
     }
   }
+
+  Future<List<Patient>> findByProfessionalId(int professionalId) async {
+    try {
+      final response = await http.get(Uri.http(baseUrl, '/patients'));
+      if (response.statusCode == 200) {
+        final List<dynamic> patients = jsonDecode(response.body);
+        List<Patient> filteredPatients = patients
+            .where((patient) => patient['professionalId'] == professionalId)
+            .map((patient) => Patient.fromJson(patient))
+            .toList();
+        return filteredPatients;
+      } else {
+        throw Exception('Failed to load patients');
+      }
+    } catch (e) {
+      print('Error fetching patients: $e');
+      return [];
+    }
+  }
+
 }

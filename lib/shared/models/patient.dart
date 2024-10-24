@@ -8,6 +8,7 @@ class Patient extends User {
   final String lastName;
   final String birthDay;
   final String phone;
+  final int professionalId;
 
   Patient({
     required int id,
@@ -21,6 +22,7 @@ class Patient extends User {
     required this.lastName,
     required this.birthDay,
     required this.phone,
+    required this.professionalId,
   }) : super(id: id, username: username, password: password, role: role);
 
   @override
@@ -36,6 +38,7 @@ class Patient extends User {
     String? lastName,
     String? birthDay,
     String? phone,
+    int? professionalId,
   }) {
     return Patient(
       id: id ?? this.id,
@@ -49,6 +52,7 @@ class Patient extends User {
       lastName: lastName ?? this.lastName,
       birthDay: birthDay ?? this.birthDay,
       phone: phone ?? this.phone,
+      professionalId: professionalId ?? this.professionalId,
     );
   }
 
@@ -62,6 +66,7 @@ class Patient extends User {
     json['lastName'] = lastName;
     json['birthDay'] = birthDay;
     json['phone'] = phone;
+    json['professionalId'] = professionalId;
     return json;
   }
 
@@ -78,6 +83,7 @@ class Patient extends User {
       lastName: json['lastName'] ?? '',
       birthDay: json['birthDay'] ?? '',
       phone: json['phone'] ?? '',
+      professionalId: json['professionalId'] ?? 0,
     );
   }
 }

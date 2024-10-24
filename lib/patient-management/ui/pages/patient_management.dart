@@ -6,9 +6,9 @@ import 'package:mind_track_app/prescription_management/ui/pages/medication_page.
 import 'package:mind_track_app/clinical-history/ui/pages/clinical-history-page.dart';
 
 class PatientManagementPage extends StatefulWidget {
-  final List<int> patientIds;
+  final int professionalId;
 
-  const PatientManagementPage({Key? key, required this.patientIds}) : super(key: key);
+  const PatientManagementPage({Key? key, required this.professionalId}) : super(key: key);
 
   @override
   _PatientManagementPageState createState() => _PatientManagementPageState();
@@ -28,13 +28,7 @@ class _PatientManagementPageState extends State<PatientManagementPage> {
 
   Future<void> _fetchPatients() async {
     try {
-      List<Patient> patients = [];
-      for (int id in widget.patientIds) {
-        final patient = await _patientService.findById(id);
-        if (patient != null) {
-          patients.add(patient);
-        }
-      }
+      List<Patient> patients = await _patientService.findByProfessionalId(widget.professionalId);
       setState(() {
         _patients = patients;
         _isLoading = false;
