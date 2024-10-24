@@ -11,30 +11,6 @@
       "username": "user2",
       "password": "password2",
       "role": "Professional"
-    },
-    {
-      "id": 1505,
-      "username": "5",
-      "password": "5",
-      "role": "Patient"
-    },
-    {
-      "id": 1505,
-      "username": "5",
-      "password": "5",
-      "role": "Patient"
-    },
-    {
-      "id": 1505,
-      "username": "5",
-      "password": "5",
-      "role": "Patient"
-    },
-    {
-      "id": 1505,
-      "username": "1",
-      "password": "1",
-      "role": "Patient"
     }
   ],
   "patients": [
@@ -67,71 +43,6 @@
       "lastName": "Uribe",
       "birthDay": "1990-01-01T00:00:00.000Z",
       "phone": "123-456-7589"
-    },
-    {
-      "id": 0,
-      "username": "1",
-      "password": "1",
-      "role": "Patient",
-      "medicalHistoryId": 0,
-      "prescriptionId": 0,
-      "diagnosisId": 0,
-      "name": "1",
-      "lastName": "1",
-      "birthDay": "1",
-      "phone": "1"
-    },
-    {
-      "id": 1505,
-      "username": "5",
-      "password": "5",
-      "role": "Patient",
-      "medicalHistoryId": 1505,
-      "prescriptionId": 1505,
-      "diagnosisId": 1505,
-      "name": "5",
-      "lastName": "5",
-      "birthDay": "5",
-      "phone": "5"
-    },
-    {
-      "id": 1505,
-      "username": "5",
-      "password": "5",
-      "role": "Patient",
-      "medicalHistoryId": 1505,
-      "prescriptionId": 1505,
-      "diagnosisId": 1505,
-      "name": "5",
-      "lastName": "5",
-      "birthDay": "5",
-      "phone": "5"
-    },
-    {
-      "id": 1505,
-      "username": "5",
-      "password": "5",
-      "role": "Patient",
-      "medicalHistoryId": 1505,
-      "prescriptionId": 1505,
-      "diagnosisId": 1505,
-      "name": "5",
-      "lastName": "5",
-      "birthDay": "5",
-      "phone": "5"
-    },
-    {
-      "id": 1505,
-      "username": "1",
-      "password": "1",
-      "role": "Patient",
-      "medicalHistoryId": 1505,
-      "prescriptionId": 1505,
-      "diagnosisId": 1505,
-      "name": "1",
-      "lastName": "1",
-      "birthDay": "1",
-      "phone": "1"
     }
   ],
   "professionals": [
@@ -199,6 +110,44 @@
       "consultationReason": "Review of asthma management plan.",
       "createdAt": "2023-03-01T12:00:00Z",
       "updatedAt": "2023-03-01T12:00:00Z"
+    }
+  ],
+  "appointments": [
+    {
+      "id": 1,
+      "patientId": 1,
+      "professionalId": 2,
+      "title": "General Checkup",
+      "description": "Routine general checkup.",
+      "date": "2023-10-01T10:00:00Z",
+      "duration": 30
+    },
+    {
+      "id": 2,
+      "patientId": 1,
+      "professionalId": 2,
+      "title": "Follow-up",
+      "description": "Follow-up on previous consultation.",
+      "date": "2023-10-05T11:00:00Z",
+      "duration": 20
+    },
+    {
+      "id": 3,
+      "patientId": 22,
+      "professionalId": 2,
+      "title": "Asthma Review",
+      "description": "Review of asthma management plan.",
+      "date": "2023-10-10T09:00:00Z",
+      "duration": 40
+    },
+    {
+      "id": 4,
+      "patientId": 1505,
+      "professionalId": 2,
+      "title": "Consultation",
+      "description": "Initial consultation.",
+      "date": "2023-10-15T14:00:00Z",
+      "duration": 60
     }
   ]
 }

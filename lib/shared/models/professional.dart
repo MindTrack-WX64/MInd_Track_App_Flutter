@@ -41,7 +41,7 @@ class Professional {
 
   factory Professional.fromJson(Map<String, dynamic> json) {
     return Professional(
-      id: json['id'] ?? 0,
+      id: json['id'] is int ? json['id'] : int.parse(json['id'] ?? '0'),
       name: json['name'] ?? '',
       specialty: json['specialty'] ?? '',
       patientIds: List<int>.from(json['patientIds'] ?? []),

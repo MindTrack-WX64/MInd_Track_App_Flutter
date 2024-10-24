@@ -43,6 +43,7 @@ class _AddPatientPageState extends State<AddPatientPage> {
         // Create Patient
         Patient newPatient = Patient(
           id: 1505,
+          professionalId: widget.professionalId,
           username: _username,
           password: _password,
           role: 'Patient',
