@@ -34,7 +34,11 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PatientMainPage(role: user.role),
+            builder: (context) => PatientMainPage(
+              role: user.role,
+              patientName: user.username, // Assuming username is the patient's name
+              patientId: user.id,
+            ),
           ),
         );
       } else {

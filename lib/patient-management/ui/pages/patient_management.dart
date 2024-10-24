@@ -1,15 +1,16 @@
-// lib/patient-management/ui/pages/patient_management.dart
 import 'package:flutter/material.dart';
 import 'package:mind_track_app/shared/services/patient_service.dart';
 import 'package:mind_track_app/shared/models/patient.dart';
 import 'package:mind_track_app/prescription_management/ui/pages/medication_page.dart';
 import 'package:mind_track_app/clinical-history/ui/pages/clinical-history-page.dart';
 import 'package:mind_track_app/appointments-management/ui/pages/appointments-page.dart';
+import 'package:mind_track_app/diagnosis-management/ui/pages/diagnosis-page.dart';
 
 class PatientManagementPage extends StatefulWidget {
   final int professionalId;
+  final String role; // Add role parameter
 
-  const PatientManagementPage({Key? key, required this.professionalId}) : super(key: key);
+  const PatientManagementPage({Key? key, required this.professionalId, required this.role}) : super(key: key);
 
   @override
   _PatientManagementPageState createState() => _PatientManagementPageState();
@@ -68,12 +69,12 @@ class _PatientManagementPageState extends State<PatientManagementPage> {
                       crossAxisCount: 2, // Adjust the number of columns as needed
                       childAspectRatio: 3, // Adjust the aspect ratio as needed
                       children: [
-                        _buildActionButton('Edit', Icons.edit, patient.id),
-                        _buildActionButton('Prescription', Icons.receipt, patient.id),
-                        _buildActionButton('Clinical History', Icons.history, patient.id, patient.name),
-                        _buildActionButton('Diagnosis', Icons.assignment, patient.id),
-                        _buildActionButton('Analytics', Icons.analytics, patient.id),
-                        _buildActionButton('Appointments', Icons.calendar_today, patient.id),
+                        _buildActionButton('Edit', Icons.edit, patient.id, widget.role),
+                        _buildActionButton('Prescription', Icons.receipt, patient.id, widget.role),
+                        _buildActionButton('Clinical History', Icons.history, patient.id, widget.role, patient.name),
+                        _buildActionButton('Diagnosis', Icons.assignment, patient.id, widget.role),
+                        _buildActionButton('Analytics', Icons.analytics, patient.id, widget.role),
+                        _buildActionButton('Appointments', Icons.calendar_today, patient.id, widget.role),
                       ],
                     ),
                   ),
@@ -86,14 +87,17 @@ class _PatientManagementPageState extends State<PatientManagementPage> {
     );
   }
 
-  Widget _buildActionButton(String text, IconData icon, int patientId, [String? patientName]) {
+  Widget _buildActionButton(String text, IconData icon, int patientId, String role, [String? patientName]) {
     return ElevatedButton.icon(
       onPressed: () {
         if (text == 'Prescription') {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MedicationPage(patientId: patientId),
+              builder: (context) => MedicationPage(
+                patientId: patientId,
+                role: role, // Pass the role here
+              ),
             ),
           );
         } else if (text == 'Clinical History' && patientName != null) {
@@ -104,6 +108,7 @@ class _PatientManagementPageState extends State<PatientManagementPage> {
                 patientId: patientId,
                 clinicalHistoryId: patientId,
                 patientName: patientName,
+                role: role, // Pass the role here
               ),
             ),
           );
@@ -112,6 +117,16 @@ class _PatientManagementPageState extends State<PatientManagementPage> {
             context,
             MaterialPageRoute(
               builder: (context) => AppointmentsPage(patientId: patientId),
+            ),
+          );
+        } else if (text == 'Diagnosis') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DiagnosisPage(
+                patientId: patientId,
+                role: role, // Pass the role here
+              ),
             ),
           );
         } else {

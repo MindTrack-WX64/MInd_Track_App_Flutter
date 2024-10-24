@@ -59,7 +59,10 @@ class _ProfessionalMainPageState extends State<ProfessionalMainPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PatientManagementPage(professionalId: widget.professionalId),
+                      builder: (context) => PatientManagementPage(
+                        professionalId: widget.professionalId,
+                        role: 'professional', // Pass the role here
+                      ),
                     ),
                   );
                 }),

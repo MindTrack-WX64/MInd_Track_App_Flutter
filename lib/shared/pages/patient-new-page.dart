@@ -8,7 +8,7 @@ import 'package:mind_track_app/shared/models/patient.dart';
 class AddPatientPage extends StatefulWidget {
   final int professionalId;
 
-  const AddPatientPage({Key? key, required this.professionalId}) : super(key: key);
+  const AddPatientPage({Key? key, required this.professionalId});
 
   @override
   _AddPatientPageState createState() => _AddPatientPageState();
