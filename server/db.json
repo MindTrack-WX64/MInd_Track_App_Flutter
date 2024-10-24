@@ -11,6 +11,30 @@
       "username": "user2",
       "password": "password2",
       "role": "Professional"
+    },
+    {
+      "id": 1505,
+      "username": "5",
+      "password": "5",
+      "role": "Patient"
+    },
+    {
+      "id": 1505,
+      "username": "5",
+      "password": "5",
+      "role": "Patient"
+    },
+    {
+      "id": 1505,
+      "username": "5",
+      "password": "5",
+      "role": "Patient"
+    },
+    {
+      "id": 1505,
+      "username": "1",
+      "password": "1",
+      "role": "Patient"
     }
   ],
   "patients": [
@@ -43,6 +67,71 @@
       "lastName": "Uribe",
       "birthDay": "1990-01-01T00:00:00.000Z",
       "phone": "123-456-7589"
+    },
+    {
+      "id": 0,
+      "username": "1",
+      "password": "1",
+      "role": "Patient",
+      "medicalHistoryId": 0,
+      "prescriptionId": 0,
+      "diagnosisId": 0,
+      "name": "1",
+      "lastName": "1",
+      "birthDay": "1",
+      "phone": "1"
+    },
+    {
+      "id": 1505,
+      "username": "5",
+      "password": "5",
+      "role": "Patient",
+      "medicalHistoryId": 1505,
+      "prescriptionId": 1505,
+      "diagnosisId": 1505,
+      "name": "5",
+      "lastName": "5",
+      "birthDay": "5",
+      "phone": "5"
+    },
+    {
+      "id": 1505,
+      "username": "5",
+      "password": "5",
+      "role": "Patient",
+      "medicalHistoryId": 1505,
+      "prescriptionId": 1505,
+      "diagnosisId": 1505,
+      "name": "5",
+      "lastName": "5",
+      "birthDay": "5",
+      "phone": "5"
+    },
+    {
+      "id": 1505,
+      "username": "5",
+      "password": "5",
+      "role": "Patient",
+      "medicalHistoryId": 1505,
+      "prescriptionId": 1505,
+      "diagnosisId": 1505,
+      "name": "5",
+      "lastName": "5",
+      "birthDay": "5",
+      "phone": "5"
+    },
+    {
+      "id": 1505,
+      "username": "1",
+      "password": "1",
+      "role": "Patient",
+      "medicalHistoryId": 1505,
+      "prescriptionId": 1505,
+      "diagnosisId": 1505,
+      "name": "1",
+      "lastName": "1",
+      "birthDay": "1",
+      "phone": "1"
     }
   ],
   "professionals": [
@@ -50,8 +139,66 @@
       "id": 2,
       "name": "Dr. Smith",
       "specialty": "therapist",
-      "patientIds": [1,22],
+      "patientIds": [
+        1,
+        22
+      ],
       "plan": "Premium"
+    }
+  ],
+  "medications": [
+    {
+      "patientId": 1,
+      "title": "Medication A",
+      "description": "Description for Medication A",
+      "quantity": 10,
+      "frequency": "Once a day",
+      "startDate": "2023-10-01",
+      "endDate": "2023-10-10"
+    },
+    {
+      "patientId": 22,
+      "title": "Medication B",
+      "description": "Description for Medication B",
+      "quantity": 20,
+      "frequency": "Twice a day",
+      "startDate": "2023-10-05",
+      "endDate": "2023-10-15"
+    },
+    {
+      "patientId": 1,
+      "title": "Medication C",
+      "description": "Description for Medication C",
+      "quantity": 15,
+      "frequency": "Three times a day",
+      "startDate": "2023-10-10",
+      "endDate": "2023-10-20"
+    }
+  ],
+  "clinicalHistories": [
+    {
+      "id": 1,
+      "patientId": 1,
+      "background": "Patient has a history of hypertension.",
+      "consultationReason": "Routine check-up.",
+      "createdAt": "2023-01-01T10:00:00Z",
+      "updatedAt": "2023-01-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "patientId": 2,
+      "background": "Patient has a history of diabetes.",
+      "consultationReason": "Follow-up on blood sugar levels.",
+      "createdAt": "2023-02-01T11:00:00Z",
+      "updatedAt": "2023-02-01T11:00:00Z"
+    },
+    {
+      "id": 22,
+      "patientId": 22,
+      "background": "Patient has a history of asthma.",
+      "consultationReason": "Review of asthma management plan.",
+      "createdAt": "2023-03-01T12:00:00Z",
+      "updatedAt": "2023-03-01T12:00:00Z"
     }
   ]
 }
