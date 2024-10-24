@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_track_app/shared/models/professional.dart';
 import 'package:mind_track_app/shared/services/professional_service.dart';
 import 'package:mind_track_app/patient-management/ui/pages/patient_management.dart';
+import 'package:mind_track_app/shared/pages/patient-new-page.dart'; // Import the AddPatientPage
 
 class ProfessionalMainPage extends StatefulWidget {
   final int professionalId;
@@ -62,7 +63,14 @@ class _ProfessionalMainPageState extends State<ProfessionalMainPage> {
                     ),
                   );
                 }),
-                _buildGridButton('Add Patient', () {}),
+                _buildGridButton('Add Patient', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddPatientPage(professionalId: widget.professionalId),
+                    ),
+                  );
+                }),
                 _buildGridButton('Profile', () {}),
                 _buildGridButton('Log Out', () {}),
               ],

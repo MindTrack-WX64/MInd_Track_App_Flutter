@@ -6,7 +6,7 @@ class Patient extends User {
   final int diagnosisId;
   final String name;
   final String lastName;
-  final DateTime birthDay;
+  final String birthDay;
   final String phone;
 
   Patient({
@@ -34,7 +34,7 @@ class Patient extends User {
     int? diagnosisId,
     String? name,
     String? lastName,
-    DateTime? birthDay,
+    String? birthDay,
     String? phone,
   }) {
     return Patient(
@@ -60,7 +60,7 @@ class Patient extends User {
     json['diagnosisId'] = diagnosisId;
     json['name'] = name;
     json['lastName'] = lastName;
-    json['birthDay'] = birthDay.toIso8601String();
+    json['birthDay'] = birthDay;
     json['phone'] = phone;
     return json;
   }
@@ -76,7 +76,7 @@ class Patient extends User {
       diagnosisId: json['diagnosisId'] ?? 0,
       name: json['name'] ?? '',
       lastName: json['lastName'] ?? '',
-      birthDay: DateTime.parse(json['birthDay'] ?? '1970-01-01'),
+      birthDay: json['birthDay'] ?? '',
       phone: json['phone'] ?? '',
     );
   }

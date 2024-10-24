@@ -3,12 +3,12 @@ import 'package:http/http.dart' as http;
 import '../models/professional.dart';
 
 class ProfessionalService {
-  final String baseUrl = '10.0.2.2:3000';
+  final String baseUrl = 'http://10.0.2.2:3000';
 
   Future<Professional?> findById(int id) async {
     print('Fetching all professionals to find ID: $id');
     try {
-      final response = await http.get(Uri.http(baseUrl, '/professionals'));
+      final response = await http.get(Uri.parse('$baseUrl/professionals'));
       print('HTTP GET request to $baseUrl/professionals completed with status code: ${response.statusCode}');
 
       if (response.statusCode == 200) {
@@ -34,7 +34,7 @@ class ProfessionalService {
   Future<void> addProfessional(Professional professional) async {
     try {
       final response = await http.post(
-        Uri.http(baseUrl, '/professionals'),
+        Uri.parse('$baseUrl/professionals'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(professional.toJson()),
       );
@@ -45,4 +45,24 @@ class ProfessionalService {
       print('Error adding professional: $e');
     }
   }
+
+  Future<void> updateProfessional(Professional professional) async {
+    try {
+      final response = await http.put(
+        Uri.parse('$baseUrl/professionals/${professional.id}'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(professional.toJson()),
+      );
+
+      print('HTTP PUT request completed with status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update professional');
+      }
+    } catch (e) {
+      print('Error updating professional: $e');
+    }
+  }
+
 }
