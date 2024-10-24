@@ -71,7 +71,7 @@ class PatientMainPage extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => MedicationPage(
                 patientId: patientId,
-                role: this.role, // Pass the role here
+                role: role, // Pass the role here
               ),
             ),
           );
@@ -91,7 +91,9 @@ class PatientMainPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AppointmentsPage(patientId: patientId),
+              builder: (context) => AppointmentsPage(
+                patientId: patientId
+              ),
             ),
           );
         } else if (text == 'Diagnosis') {
