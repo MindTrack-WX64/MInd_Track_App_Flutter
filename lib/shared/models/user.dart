@@ -1,5 +1,5 @@
 class User {
-  final String id;
+  final int id;
   final String username;
   final String password;
   final String role;
@@ -12,7 +12,7 @@ class User {
   });
 
   User copyWith({
-    String? id,
+    int? id,
     String? username,
     String? password,
     String? role,
@@ -36,7 +36,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'] ?? '',
+      id: json['id'] ?? 0,
       username: json['username'] ?? '',
       password: json['password'] ?? '',
       role: json['role'] ?? '',

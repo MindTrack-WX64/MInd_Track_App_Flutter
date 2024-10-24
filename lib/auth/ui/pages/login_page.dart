@@ -22,11 +22,12 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       print('Login successful: ${user.username}');
+      print('User role: ${user.role}');
       if (user.role == 'Professional') {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProfessionalMainPage(role: user.role),
+            builder: (context) => ProfessionalMainPage(professionalId: user.id),
           ),
         );
       } else if (user.role == 'Patient') {
@@ -36,6 +37,8 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context) => PatientMainPage(role: user.role),
           ),
         );
+      } else {
+        print('Unknown role: ${user.role}');
       }
     } catch (e) {
       // Show error message

@@ -6,11 +6,23 @@ class ProfessionalService {
   final String baseUrl = '10.0.2.2:3000';
 
   Future<Professional?> findById(int id) async {
+    print('Fetching all professionals to find ID: $id');
     try {
-      final response = await http.get(Uri.http(baseUrl, '/professionals/$id'));
+      final response = await http.get(Uri.http(baseUrl, '/professionals'));
+      print('HTTP GET request to $baseUrl/professionals completed with status code: ${response.statusCode}');
+
       if (response.statusCode == 200) {
-        return Professional.fromJson(jsonDecode(response.body));
+        final List<dynamic> professionals = jsonDecode(response.body);
+        for (var professional in professionals) {
+          if (professional['id'] == id) {
+            print('Professional found with ID: $id');
+            return Professional.fromJson(professional);
+          }
+        }
+        print('No matching professional found with ID: $id');
+        return null;
       } else {
+        print('Failed to fetch professionals. Status code: ${response.statusCode}');
         throw Exception('Failed to load professional');
       }
     } catch (e) {

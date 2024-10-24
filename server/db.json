@@ -4,13 +4,13 @@
       "id": 1,
       "username": "user1",
       "password": "password1",
-      "roles": "Patient"
+      "role": "Patient"
     },
     {
       "id": 2,
       "username": "user2",
       "password": "password2",
-      "roles": "Professional"
+      "role": "Professional"
     }
   ],
   "patients": [
@@ -29,7 +29,9 @@
     {
       "id": 2,
       "name": "Dr. Smith",
-      "specialty": "Cardiology"
+      "specialty": "Cardiology",
+      "patientIds": [1],
+      "plan": "Premium"
     }
   ]
 }
