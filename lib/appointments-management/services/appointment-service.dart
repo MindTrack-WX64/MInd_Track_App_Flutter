@@ -25,4 +25,16 @@ class AppointmentService {
       throw Exception('Failed to load appointments');
     }
   }
+  Future<void> createAppointment(Appointment appointment) async {
+    final response = await http.post(
+      Uri.http(baseUrl, '/appointments'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(appointment.toJson()),
+    );
+
+    if (response.statusCode != 201) {
+      throw Exception('Failed to create appointment');
+    }
+  }
+
 }

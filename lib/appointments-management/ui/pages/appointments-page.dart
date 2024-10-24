@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import '../../services/appointment-service.dart';
 import 'package:mind_track_app/appointments-management/model/appointment.dart';
+import 'package:mind_track_app/appointments-management/ui/pages/appointments-new-page.dart';
 
 class AppointmentsPage extends StatefulWidget {
   final int patientId;
@@ -38,10 +38,30 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
     }
   }
 
+  Future<void> _navigateToNewAppointmentPage() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AppointmentNewPage(patientId: widget.patientId),
+      ),
+    );
+    if (result == true) {
+      _fetchAppointments();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Appointments')),
+      appBar: AppBar(
+        title: Text('Appointments'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: _navigateToNewAppointmentPage,
+          ),
+        ],
+      ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(

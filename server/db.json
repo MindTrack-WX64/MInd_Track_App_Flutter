@@ -168,6 +168,47 @@
       "description": "Initial consultation.",
       "date": "2023-10-15T14:00:00Z",
       "duration": 60
+    },
+    {
+      "id": 0,
+      "patientId": 1,
+      "professionalId": 0,
+      "title": "nueva",
+      "description": "es una",
+      "date": "2024-10-24T13:58:08.391077",
+      "duration": 60
+    }
+  ],
+  "diagnosis": [
+    {
+      "id": 1,
+      "patientId": 1,
+      "diagnosis": "Hypertension",
+      "date": "2023-10-01"
+    },
+    {
+      "id": 2,
+      "patientId": 2,
+      "diagnosis": "Diabetes",
+      "date": "2023-10-05"
+    },
+    {
+      "id": 3,
+      "patientId": 22,
+      "diagnosis": "Asthma",
+      "date": "2023-10-10"
+    },
+    {
+      "id": 4,
+      "patientId": 1505,
+      "diagnosis": "Initial Consultation",
+      "date": "2023-10-15"
+    },
+    {
+      "id": 0,
+      "patientId": 1505,
+      "diagnosis": "Toc",
+      "date": "today"
     }
   ]
 }
