@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
 class AuthService {
-  final String baseUrl = 'http://192.168.1.100:3000';
+  final String baseUrl = '10.0.2.2:3000';
 
   Future<User> signIn(String username, String password) async {
     print('Attempting to sign in with Username: $username, Password: $password');
