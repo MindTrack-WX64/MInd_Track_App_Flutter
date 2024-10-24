@@ -4,6 +4,7 @@ import 'package:mind_track_app/shared/services/patient_service.dart';
 import 'package:mind_track_app/shared/models/patient.dart';
 import 'package:mind_track_app/prescription_management/ui/pages/medication_page.dart';
 import 'package:mind_track_app/clinical-history/ui/pages/clinical-history-page.dart';
+import 'package:mind_track_app/appointments-management/ui/pages/appointments-page.dart';
 
 class PatientManagementPage extends StatefulWidget {
   final int professionalId;
@@ -37,7 +38,6 @@ class _PatientManagementPageState extends State<PatientManagementPage> {
       setState(() {
         _isLoading = false;
       });
-      print('Error fetching patients: $e');
     }
   }
 
@@ -105,6 +105,13 @@ class _PatientManagementPageState extends State<PatientManagementPage> {
                 clinicalHistoryId: patientId,
                 patientName: patientName,
               ),
+            ),
+          );
+        } else if (text == 'Appointments') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AppointmentsPage(patientId: patientId),
             ),
           );
         } else {
