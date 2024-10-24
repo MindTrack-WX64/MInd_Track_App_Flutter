@@ -27,14 +27,7 @@ class _ProfessionalMainPageState extends State<ProfessionalMainPage> {
 
   Future<void> _fetchProfessional() async {
     try {
-      //final professional = await _professionalService.findById(widget.professionalId);
-      final professional = Professional(
-        id: 2,
-        name: "Dr. Smith",
-        specialty: "therapist",
-        patientIds: [1, 22],
-        plan: "Premium",
-      );
+      final professional = await _professionalService.findById(widget.professionalId);
       setState(() {
         _professional = professional;
         _isLoading = false;
@@ -55,13 +48,24 @@ class _ProfessionalMainPageState extends State<ProfessionalMainPage> {
           ? Center(child: CircularProgressIndicator())
           : _professional == null
           ? Center(child: Text('Professional not found'))
-          : Column(
+          : Stack(
         children: [
-          ProfessionalInfo(professional: _professional!),
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
+          Positioned.fill(
+            child: Image.asset(
+              'assets/bgAddPatient.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          // Mostrar la información del profesional
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(height: 25),
+                // Mostrar datos de la API en una Card adicional
+                if (_professional != null)
+                  ProfessionalInfo(professional: _professional!),
                 _buildGridButton('Patients', () {
                   Navigator.push(
                     context,
@@ -96,6 +100,12 @@ class _ProfessionalMainPageState extends State<ProfessionalMainPage> {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue, // Background color
+          foregroundColor: Colors.white, // Botón azul
+          textStyle: TextStyle(fontSize: 24), // Button text size
+          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0), // Padding interno
+        ),
         child: Text(text),
       ),
     );
@@ -109,16 +119,58 @@ class ProfessionalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Professional Name: ${professional.name}', style: TextStyle(fontSize: 18)),
-          Text('Specialty: ${professional.specialty}', style: TextStyle(fontSize: 18)),
-          Text('Plan: ${professional.plan}', style: TextStyle(fontSize: 18)),
-          Text('Patient IDs: ${professional.patientIds.join(', ')}', style: TextStyle(fontSize: 18)),
-        ],
+    return Card(
+      color: Colors.white, // Card color set to white
+      elevation: 8.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0), // Border radius 30
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(28.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Professional Data', // Updated text
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Center(
+              child: Image.asset(
+                'assets/icAddPatient.png',
+                height: 150,
+              ),
+            ),
+            SizedBox(height: 25),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Professional name:', style: TextStyle(fontSize: 22)),
+                Text('${professional.name}', style: TextStyle(fontSize: 22)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Specialty:', style: TextStyle(fontSize: 22)),
+                Text('${professional.specialty}', style: TextStyle(fontSize: 22)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Plan:', style: TextStyle(fontSize: 22)),
+                Text('${professional.plan}', style: TextStyle(fontSize: 22)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Patients IDs:', style: TextStyle(fontSize: 22)),
+                Text('${professional.patientIds.join(', ')}', style: TextStyle(fontSize: 22)),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
